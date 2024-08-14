@@ -1,10 +1,15 @@
-from django.http import HttpResponse
+from rest_framework import generics
+from .models import User
+from .serializers import UserSerializer  # Make sure this import is correct
 
-def user_list(request):
-    return HttpResponse('user_list here')
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-def user_detail(request):
-    return HttpResponse('user_detail here')
+class UserDetailView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-def user_edit(request):
-    return HttpResponse('user_edit here')
+class UserEditView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

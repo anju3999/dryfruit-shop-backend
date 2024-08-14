@@ -1,9 +1,11 @@
-from django.http import JsonResponse, HttpResponse
+from rest_framework import generics
 from .models import Order
+from .serializers import OrderSerializer
 
-def order_list(request):
-    # orders = Order.objects.all().values('id', 'user', 'order_date', 'status', 'total_amount')
-    return HttpResponse('Orders list here')
+class OrderListView(generics.ListAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
 
-def order_detail(request):
-    return HttpResponse('Order detail here')
+class OrderDetailView(generics.RetrieveAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
